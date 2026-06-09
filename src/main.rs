@@ -5,11 +5,12 @@ Program Details: <its a interactable story game, with multiple scenes and mini g
 */
 
 mod modules;
-
 mod menu;
-mod game;
+mod slothtalk;
 use macroquad::prelude::*;
-
+use crate::modules::text_button::TextButton;
+use crate::modules::preload_image::TextureManager;
+    use crate::modules::preload_image::LoadingScreenOptions;
 /// Set up window settings before the app runs
 fn window_conf() -> Conf {
     Conf {
@@ -31,14 +32,20 @@ async fn main() {
     let mut last_switch = get_time() - 0.02;
 
 
+let tm = TextureManager::new();
 
+    tm.preload_with_loading_screen(&["assets/sloth.png", "assets/greed.png","assets/mrplaceholder.png"], None).await;
+    
+
+    
+    
     loop {
      clear_background(WHITE);
      
         if get_time() - last_switch > 0.01 {
             current_screen = match current_screen.as_str() {
                 "menu" => menu::run().await,
-                "game" => game::run().await,
+                "slothtalk" => slothtalk::run().await,
                 _ => break,
             };
             last_switch = get_time();

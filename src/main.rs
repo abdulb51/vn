@@ -32,9 +32,8 @@ async fn main() {
     let mut last_switch = get_time() - 0.02;
 
 
-let tm = TextureManager::new();
-
-    tm.preload_with_loading_screen(&["assets/sloth.png", "assets/greed.png","assets/mrplaceholder.png"], None).await;
+// let mut tm = TextureManager::new();
+//     tm.preload_with_loading_screen(&["assets/sloth.png", "assets/greed.png","assets/placeholder.png"], None).await;
     
 
     

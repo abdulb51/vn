@@ -18,3 +18,4 @@ use crate::modules::grid::draw_grid;
          pub mod text_button;
             pub mod still_image;
                 pub mod preload_image;
+                  pub mod label;

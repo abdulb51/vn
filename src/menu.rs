@@ -3,9 +3,8 @@ use crate::modules::text_button::TextButton;
 use crate::modules::grid::draw_grid;
 use crate::modules::still_image::StillImage;
  use crate::modules::preload_image::TextureManager;
-    use crate::modules::preload_image::LoadingScreenOptions;
-    
-    
+ use crate::modules::preload_image::LoadingScreenOptions;
+
     fn window_conf() -> Conf {
     Conf {
         window_title: "vn".to_string(),
@@ -19,14 +18,14 @@ use crate::modules::still_image::StillImage;
     }
 }
 pub async fn run() -> String {
-    
+    // tm: TextureManager(,TextureManager)
 
 
       let img_mrplaceholder = StillImage::new(
-        "assets/mrplaceholder.png",
+        "assets/placeholder.png",
         1000.0,  // width
         1000.0,  // height
-        500.0,  // x position
+        500.0,  // x position 
         400.0,   // y position
         true,   // Enable stretching
         1.0,    // Normal zoom (100%)
@@ -73,9 +72,11 @@ pub async fn run() -> String {
             return "slothtalk".to_string();
         }
        
-        img_mrplaceholder.draw();
+img_mrplaceholder.draw();
 img_mrsloth.draw();
 img_mrgreed.draw();
+
+
         draw_text("Menu", 20.0, 40.0, 30.0, BLACK);
     
         next_frame().await;

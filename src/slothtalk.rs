@@ -5,6 +5,7 @@ use crate::modules::text_button::TextButton;
 use crate::modules::grid::draw_grid;
   use crate::modules::label::Label;
   use crate::modules::label::TextAlign;
+  use crate::modules::text_input::TextInput;
 
 
 fn window_conf() -> Conf {
@@ -22,7 +23,14 @@ fn window_conf() -> Conf {
 
 
 
-pub async fn run() -> String {
+pub async fn run(tm: TextureManager) -> (String,TextureManager)
+ {
+
+
+
+
+
+
   let mut btnclicks = 0;
 
   let btn_exit = TextButton::new(
@@ -37,10 +45,10 @@ pub async fn run() -> String {
   );
 
 let btn_back = TextButton::new(
-    100.0,
-    100.0,
-    200.0,
-    60.0,
+    350.0,
+    900.0,
+    50.0,
+    50.0,
     "<-",
     PINK,
     WHITE,
@@ -49,10 +57,10 @@ let btn_back = TextButton::new(
 
 
   let btn_next = TextButton::new(
-        100.0,
-        200.0,
-        200.0,
-        60.0,
+        1350.0,
+        900.0,
+        50.0,
+        50.0,
         "->",
         PINK,
         WHITE,
@@ -61,33 +69,58 @@ let btn_back = TextButton::new(
  
   let sloth = StillImage::new(
       "assets/sloth.png",
-      1000.0,  // width
-      1000.0,  // height
-      500.0,  // x position 
-      400.0,   // y position
+      1080.0,  // width
+      1080.0,  // height
+      350.0,  // x position 
+      -100.0,   // y position
       true,   // Enable stretching
       1.0,    // Normal zoom (100%)
   ).await;
   
 
-  let mut lbl_slothtalk = Label::new("", 50.0, 100.0, 30);
+  let mut lbl_slothtalk = Label::new("sloth", 50.0, 100.0, 30);
    lbl_slothtalk.with_alignment(TextAlign::Center);
   
+  
+
+let mut img_bg = StillImage::new(
+    "assets/parkday.png",
+    1920.0,  // width
+    1080.0,  // height
+    0.0,  // x position 
+    0.0,   // y position
+    true,   // Enable stretching
+    1.0,    // Normal zoom (100%)
+).await;
 
 
-
-
-    loop {
+loop {
+  
   clear_background(WHITE);
-        draw_text("slothtalk", 20.0, 40.0, 30.0, BLACK);
+    
+// img_bg.set_preload(tm.get_preload("assets/parkday.png").unwrap());
+    
+    img_bg.draw();
+
+
+
+     draw_text("slothtalk", 20.0, 40.0, 30.0, BLACK);
     draw_grid(50.0,BLACK);
 
 
        
 
         if btn_exit.click() {
-            return "menu".to_string();
+            return ("menu".to_string(),tm);
         }
+
+
+
+
+        if btn_back.click() {
+  btnclicks -= 1;
+}
+
 if btn_next.click() {
   btnclicks += 1;
   
@@ -100,10 +133,13 @@ if btn_next.click() {
 
  if btnclicks ==1{
 
+
+
   }
   
 
         sloth.draw();
+        draw_rectangle(450.0, 700.0, 1000.0, 300.0, GRAY);
         next_frame().await;
     }
 }

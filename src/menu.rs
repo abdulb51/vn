@@ -17,8 +17,19 @@ use crate::modules::still_image::StillImage;
         ..Default::default()
     }
 }
-pub async fn run() -> String {
-    // tm: TextureManager(,TextureManager)
+
+pub async fn run(tm: TextureManager) -> (String,TextureManager)
+ {
+  let btn_exit = TextButton::new(
+    1870.0,
+    0.0,
+    50.0,
+    50.0,
+    "X",
+    RED,
+    BLACK,
+    50);
+
 
 
       let img_mrplaceholder = StillImage::new(
@@ -69,14 +80,16 @@ pub async fn run() -> String {
       
 
        if btn_play.click() {
-            return "slothtalk".to_string();
+            return ("slothtalk".to_string(),tm);
         }
        
 img_mrplaceholder.draw();
 img_mrsloth.draw();
 img_mrgreed.draw();
 
-
+if btn_exit.click() {
+    return ("main".to_string(),tm);;
+}
         draw_text("Menu", 20.0, 40.0, 30.0, BLACK);
     
         next_frame().await;

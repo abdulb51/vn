@@ -32,21 +32,22 @@ async fn main() {
     let mut last_switch = get_time() - 0.02;
 
 
-// let mut tm = TextureManager::new();
-//     tm.preload_with_loading_screen(&["assets/sloth.png", "assets/greed.png","assets/placeholder.png"], None).await;
-    
+let mut tm = TextureManager::new();
+tm.preload_with_loading_screen(&["assets/sloth.png", "assets/greed.png","assets/placeholder.png", "assets/parkday.png"], None).await;
 
-    
+
+
     
     loop {
      clear_background(WHITE);
      
         if get_time() - last_switch > 0.01 {
-            current_screen = match current_screen.as_str() {
-                "menu" => menu::run().await,
-                "slothtalk" => slothtalk::run().await,
+            (current_screen, tm) = match current_screen.as_str() {
+                "menu" => menu::run(tm).await,
+                "slothtalk" => slothtalk::run(tm).await,
                 _ => break,
             };
+            
             last_switch = get_time();
         }
         next_frame().await;

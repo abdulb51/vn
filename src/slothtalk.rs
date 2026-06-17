@@ -23,12 +23,13 @@ fn window_conf() -> Conf {
 
 
 
-pub async fn run(tm: TextureManager) -> (String,TextureManager)
- {
+pub async fn run(tm: TextureManager, elapsed: f64, game1: i32, game2: i32, game3: i32) -> (String, TextureManager, f64, i32, i32, i32) {
 
 
+let mut player = "".to_string();
 
-
+    let mut name = TextInput::new(500.0, 800.0, 300.0, 40.0, 25.0);
+    name.set_prompt("Enter your name...");
 
 
   let mut btnclicks = 0;
@@ -45,7 +46,7 @@ pub async fn run(tm: TextureManager) -> (String,TextureManager)
   );
 
 let btn_back = TextButton::new(
-    350.0,
+    450.0,
     900.0,
     50.0,
     50.0,
@@ -56,8 +57,9 @@ let btn_back = TextButton::new(
   );
 
 
+
   let btn_next = TextButton::new(
-        1350.0,
+        1400.0,
         900.0,
         50.0,
         50.0,
@@ -78,10 +80,12 @@ let btn_back = TextButton::new(
   ).await;
   
 
-  let mut lbl_slothtalk = Label::new("sloth", 50.0, 100.0, 30);
+  let mut lbl_slothtalk = Label::new("sloth", 500.0, 800.0, 30);
    lbl_slothtalk.with_alignment(TextAlign::Center);
   
-  
+
+
+
 
 let mut img_bg = StillImage::new(
     "assets/parkday.png",
@@ -97,21 +101,21 @@ let mut img_bg = StillImage::new(
 loop {
   
   clear_background(WHITE);
-    
-// img_bg.set_preload(tm.get_preload("assets/parkday.png").unwrap());
+    draw_grid(50.0, GRAY);
+
     
     img_bg.draw();
 
 
 
      draw_text("slothtalk", 20.0, 40.0, 30.0, BLACK);
-    draw_grid(50.0,BLACK);
+
 
 
        
 
         if btn_exit.click() {
-            return ("menu".to_string(),tm);
+            return ("menu".to_string(),tm, elapsed, game1, game2, game3);
         }
 
 
@@ -133,13 +137,44 @@ if btn_next.click() {
 
  if btnclicks ==1{
 
-
+  lbl_slothtalk.set_text("zzz");
 
   }
-  
 
-        sloth.draw();
-        draw_rectangle(450.0, 700.0, 1000.0, 300.0, GRAY);
+  if btnclicks ==2 {
+
+  lbl_slothtalk.set_text("zzzzz");
+
+  }
+
+if btnclicks ==3 {
+
+  lbl_slothtalk.set_text("huh... who's there?!");
+
+  }
+
+if btnclicks ==4 {
+
+  lbl_slothtalk.set_text("zzz");
+
+  }
+
+  if btnclicks ==5 {
+
+  lbl_slothtalk.set_text("Who are you?");
+
+  }
+
+  if btnclicks ==6 {
+lbl_slothtalk.set_text("");
+ name.draw();
+
+  }
+   sloth.draw();
+draw_rectangle(450.0, 700.0, 1000.0, 200.0, GRAY);
+        draw_rectangle(500., 900., 900., 50., GRAY);
+    
+        lbl_slothtalk.draw();
         next_frame().await;
     }
 }

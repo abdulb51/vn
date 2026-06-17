@@ -13,10 +13,10 @@ use crate::modules::grid::draw_grid;
 --------------------------------------------
 */
 // Add modules below
+    pub mod collision;
     pub mod grid;
-     pub mod text_input;
-         pub mod text_button;
-            pub mod still_image;
-                pub mod preload_image;
-                  pub mod label;
-                     
+    pub mod label;
+    pub mod preload_image;
+    pub mod still_image;
+    pub mod text_button;
+    pub mod text_input;

@@ -18,8 +18,7 @@ use crate::modules::still_image::StillImage;
     }
 }
 
-pub async fn run(tm: TextureManager) -> (String,TextureManager)
- {
+pub async fn run(tm: TextureManager, elapsed: f64, game1: i32, game2: i32, game3: i32) -> (String, TextureManager, f64, i32, i32, i32) {
   let btn_exit = TextButton::new(
     1870.0,
     0.0,
@@ -75,12 +74,12 @@ pub async fn run(tm: TextureManager) -> (String,TextureManager)
     
     loop {
         clear_background(WHITE);
-       draw_grid(50.0,BLACK);
+       
 
       
 
        if btn_play.click() {
-            return ("slothtalk".to_string(),tm);
+            return ("slothtalk".to_string(),tm, elapsed, game1, game2, game3);
         }
        
 img_mrplaceholder.draw();
@@ -88,7 +87,7 @@ img_mrsloth.draw();
 img_mrgreed.draw();
 
 if btn_exit.click() {
-    return ("main".to_string(),tm);;
+    return ("main".to_string(),tm, elapsed, game1, game2, game3);
 }
         draw_text("Menu", 20.0, 40.0, 30.0, BLACK);
     

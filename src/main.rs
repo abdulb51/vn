@@ -7,6 +7,8 @@ Program Details: <its a interactable story game, with multiple scenes and mini g
 mod modules;
 mod menu;
 mod slothtalk;
+mod slothg1;
+mod wing1;
 use macroquad::prelude::*;
 use crate::modules::text_button::TextButton;
 use crate::modules::preload_image::TextureManager;
@@ -30,9 +32,13 @@ fn window_conf() -> Conf {
 async fn main() {
     let mut current_screen = "menu".to_string();
     let mut last_switch = get_time() - 0.02;
-
-
+    let mut game1 = 0;
+    let mut game2 = 0;
+    let mut game3 = 0;
+let mut elapsed = 0.0;
 let mut tm = TextureManager::new();
+
+
 tm.preload_with_loading_screen(&["assets/sloth.png", "assets/greed.png","assets/placeholder.png", "assets/parkday.png"], None).await;
 
 
@@ -42,9 +48,11 @@ tm.preload_with_loading_screen(&["assets/sloth.png", "assets/greed.png","assets/
      clear_background(WHITE);
      
         if get_time() - last_switch > 0.01 {
-            (current_screen, tm) = match current_screen.as_str() {
-                "menu" => menu::run(tm).await,
-                "slothtalk" => slothtalk::run(tm).await,
+            (current_screen, tm, elapsed, game1, game2, game3) = match current_screen.as_str() {
+                "menu" => menu::run(tm, elapsed, game1, game2, game3).await,
+                "slothtalk" => slothtalk::run(tm, elapsed, game1, game2, game3).await,
+                "slothg1" => slothg1::run(tm, elapsed, game1, game2, game3).await,
+                "wing1" => wing1::run(tm, elapsed, game1, game2, game3).await,
                 _ => break,
             };
             

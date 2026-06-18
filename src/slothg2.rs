@@ -4,13 +4,10 @@ By: <Abdul Baig>
 Date: 2026-06-01
 Program Details: a game where you have to click space when you are above the rectangle and it gets smaller each time
 */
-use macroquad::rand::rand;
 use crate::modules::collision::check_collision;
 use crate::modules::grid::draw_grid;
-use crate::modules::label::Label;
 use crate::modules::preload_image::TextureManager;
 use crate::modules::still_image::StillImage;
-use macroquad::prelude::KeyCode::Right;
 use macroquad::prelude::*;
 
 
@@ -66,13 +63,13 @@ let collision = check_collision(&img_player, &img_bar, 1);
  let mut player_pos = img_player.pos();
         //println!("player position: x:{:.1}, y:{:.1}", player_pos.x, player_pos.y);
         if player_pos.x == -50.0 && player_pos.y == 300.0 {
-            player_x = 5.0;
+            player_x = 10.0;
             player_y = 0.0;
 
         }
 if player_pos.x == 1050.0 && player_pos.y == 300.0 {
     
-            player_x = -5.0;
+            player_x = -10.0;
             player_y = 0.0;
     
         }

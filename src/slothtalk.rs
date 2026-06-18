@@ -5,7 +5,6 @@ use crate::modules::preload_image::TextureManager;
 use crate::modules::still_image::StillImage;
 use crate::modules::text_button::TextButton;
 use crate::modules::text_input::TextInput;
-use macroquad::prelude::KeyCode::Right;
 use macroquad::prelude::*;
 
 pub async fn run(

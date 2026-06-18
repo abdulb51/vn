@@ -1,9 +1,7 @@
 use crate::modules::label::Label;
 use crate::modules::preload_image::TextureManager;
-use crate::modules::still_image::StillImage;
 use crate::modules::text_button::TextButton;
 use macroquad::color::BLACK;
-use macroquad::miniquad::window::quit;
 use macroquad::prelude::*;
 
 pub async fn run(tm: TextureManager,_elapsed: f64, game1: i32, game2: i32, game3: i32, playername: String, btnclicks: i32) -> 

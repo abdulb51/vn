@@ -11,10 +11,10 @@ mod slothg1;
 mod wing1;
 mod g1lose;
 mod slothg2;
+mod greedg1;
 use macroquad::prelude::*;
-use crate::modules::text_button::TextButton;
 use crate::modules::preload_image::TextureManager;
-    use crate::modules::preload_image::LoadingScreenOptions;
+  
     
 /// Set up window settings before the app runs
 fn window_conf() -> Conf {
@@ -44,7 +44,8 @@ let mut tm = TextureManager::new();
 let mut playername = String::new();
 
 tm.preload_with_loading_screen(&["assets/sloth.png", "assets/greed.png","assets/placeholder.png",
- "assets/parkday.png", "assets/maze.png", "assets/rect1.png", "assets/rect2.png","assets/rect3.png","assets/rect4.png","assets/rect5.png","assets/rect6.png"], None).await;
+ "assets/parkday.png", "assets/maze.png", "assets/rect1.png", "assets/rect2.png","assets/rect3.png","assets/rect4.png",
+ "assets/rect5.png","assets/rect6.png", "assets/spaceneedle afternoon.png", "assets/longroad.png", "assets/recar.png"], None).await;
 
 
 let mut current_screen = "menu".to_string();
@@ -60,6 +61,8 @@ let mut current_screen = "menu".to_string();
                 "wing1" => wing1::run(tm, elapsed, game1, game2, game3, playername, btnclicks).await,
                 "g1lose" => g1lose::run(tm, elapsed, game1, game2, game3, playername, btnclicks).await,
                 "slothg2" => slothg2::run(tm, elapsed, game1, game2, game3, playername, btnclicks).await,
+                "greedg1" => greedg1::run(tm, elapsed, game1, game2, game3, playername, btnclicks).await,
+
                 _ => break,
             };
             

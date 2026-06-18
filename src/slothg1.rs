@@ -5,11 +5,9 @@ Program Details: a tag game where you have to tag the target bot 10 times so you
 */
 use macroquad::rand::rand;
 use crate::modules::collision::check_collision;
-use crate::modules::grid::draw_grid;
 use crate::modules::label::Label;
 use crate::modules::preload_image::TextureManager;
 use crate::modules::still_image::StillImage;
-use macroquad::prelude::KeyCode::Right;
 use macroquad::prelude::*;
 
 

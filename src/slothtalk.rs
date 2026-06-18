@@ -274,7 +274,7 @@ img_bg.set_preload(tm.get_preload("assets/parkday.png").unwrap());
 if btnclicks == 23 {
             btn_back.enabled = true;
             btn_next.enabled = true;
-            lbl_slothtalk.set_text(format!("for your next game, you will have to dodge incoming traffic and get to the other side."));
+            lbl_slothtalk.set_text(format!("for your next game, you will have to \ndodge incoming traffic and get to the other side."));
         }
 
        if btnclicks == 24 {
@@ -289,7 +289,7 @@ if btnclicks == 23 {
        
        if btn_play.click() {
                 return (
-                    "slothg3".to_string(),
+                    "greedg1".to_string(),
                     tm,
                     _elapsed,
                     game1,

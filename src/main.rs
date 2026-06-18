@@ -26,7 +26,7 @@ fn window_conf() -> Conf {
         window_height: 1080,
         fullscreen: false,
         high_dpi: true,
-        window_resizable: true,
+        window_resizable: false,
         sample_count: 4, // MSAA: makes shapes look smoother
         ..Default::default()
     }

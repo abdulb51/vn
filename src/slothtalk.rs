@@ -34,11 +34,11 @@ pub async fn run(
     let mut show_cheats = false;
 
     let mut sloth = StillImage::new(
-        "assets/sloth.png",
+        "",
         1080.0, // width
         1080.0, // height
         550.0,  // x position
-        -100.0, // y position
+        -150.0, // y position
         true,   // Enable stretching
         1.0,    // Normal zoom (100%)
     )
@@ -154,7 +154,7 @@ img_bg.set_preload(tm.get_preload("assets/parkday.png").unwrap());
             btn_back.enabled = true;
             btn_next.enabled = true;
 
-            lbl_slothtalk.set_text(format!("if you can beat me and my brother, I'll let you live"));
+            lbl_slothtalk.set_text(format!("if you can beat me and my brother, I'll let you live \n for the first game, catch 10 times and move on to the next game"));
         }
 
         if btnclicks == 10 {
@@ -214,7 +214,7 @@ img_bg.set_preload(tm.get_preload("assets/parkday.png").unwrap());
             btn_back.enabled = true;
             btn_next.enabled = true;
 
-            lbl_slothtalk.set_text(format!("let's see if you're fast enough to beat this one..."));
+            lbl_slothtalk.set_text(format!("let's see if you're fast enough to beat this one...\n click space on the green bar, but be careful... it shrinks..."));
         }
 
         if btnclicks == 17 {
@@ -248,14 +248,59 @@ img_bg.set_preload(tm.get_preload("assets/parkday.png").unwrap());
             btn_next.enabled = true;
             lbl_slothtalk.set_text(format!("woah you're really fast..."));
         }
+
+        if btnclicks == 20 {
+            btn_back.enabled = true;
+            btn_next.enabled = true;
+            lbl_slothtalk.set_text(format!("lets see if you can beat my brother..."));
+        }
        
        
        
+       if btnclicks == 21 {
+            btn_back.enabled = true;
+            btn_next.enabled = true;
+            lbl_slothtalk.set_text(format!(""));
+            sloth.set_image("assets/greed.png");
+            
+        }
        
+       if btnclicks == 22 {
+   btn_back.enabled = true;
+            btn_next.enabled = true;
+  lbl_slothtalk.set_text(format!("Hello, {}\n I'm Greed.", playername));
+       }
        
+if btnclicks == 23 {
+            btn_back.enabled = true;
+            btn_next.enabled = true;
+            lbl_slothtalk.set_text(format!("for your next game, you will have to dodge incoming traffic and get to the other side."));
+        }
+
+       if btnclicks == 24 {
+
+  lbl_slothtalk.set_text(format!("if you beat my next game your life will be spared\n but if you fail, you will have to restart from zero,\n good luck! {}...", playername));
+       }
+
+       if btnclicks == 25 {
+            btn_back.enabled = true;
+            btn_next.enabled = false;
+            lbl_slothtalk.set_text(format!(""));
        
-       
-       
+       if btn_play.click() {
+                return (
+                    "slothg3".to_string(),
+                    tm,
+                    _elapsed,
+                    game1,
+                    game2,
+                    game3,
+                    playername.to_string(),
+                    btnclicks,
+                );
+            }
+        }
+
        if is_key_pressed(KeyCode::F1) {
             show_cheats = !show_cheats;
         }

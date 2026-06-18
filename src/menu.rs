@@ -50,8 +50,8 @@ pub async fn run(
 
       let mut img_bg = StillImage::new(
         "",
-        1000.0, // width
-        1920.0, // height
+        1920.0, // width
+        1080.0, // height
         0.0,    // x position
     0.0,  // y position
         true,   // Enable stretching
@@ -65,7 +65,7 @@ pub async fn run(
 
     loop {
         clear_background(WHITE);
-
+img_bg.draw();
         if btn_play.click() {
             return ("slothtalk".to_string(), tm, _elapsed, game1, game2, game3, playername, btnclicks);
         }

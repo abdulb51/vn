@@ -12,6 +12,8 @@ mod wing1;
 mod g1lose;
 mod slothg2;
 mod greedg1;
+mod g3lose;
+mod gamewin;
 use macroquad::prelude::*;
 use crate::modules::preload_image::TextureManager;
   
@@ -24,7 +26,7 @@ fn window_conf() -> Conf {
         window_height: 1080,
         fullscreen: false,
         high_dpi: true,
-        window_resizable: false,
+        window_resizable: true,
         sample_count: 4, // MSAA: makes shapes look smoother
         ..Default::default()
     }
@@ -45,7 +47,7 @@ let mut playername = String::new();
 
 tm.preload_with_loading_screen(&["assets/sloth.png", "assets/greed.png","assets/placeholder.png",
  "assets/parkday.png", "assets/maze.png", "assets/rect1.png", "assets/rect2.png","assets/rect3.png","assets/rect4.png",
- "assets/rect5.png","assets/rect6.png", "assets/spaceneedle afternoon.png", "assets/longroad.png", "assets/recar.png"], None).await;
+ "assets/rect5.png","assets/rect6.png", "assets/spaceneedle afternoon.png", "assets/longroad.png", "assets/redcar.png", "assets/redcardown.png","assets/frame.png", "assets/wincon.png"], None).await;
 
 
 let mut current_screen = "menu".to_string();
@@ -62,7 +64,8 @@ let mut current_screen = "menu".to_string();
                 "g1lose" => g1lose::run(tm, elapsed, game1, game2, game3, playername, btnclicks).await,
                 "slothg2" => slothg2::run(tm, elapsed, game1, game2, game3, playername, btnclicks).await,
                 "greedg1" => greedg1::run(tm, elapsed, game1, game2, game3, playername, btnclicks).await,
-
+                "g3lose" => g3lose::run(tm, elapsed, game1, game2, game3, playername, btnclicks).await,
+                "gamewin" => gamewin::run(tm, elapsed, game1, game2, game3, playername, btnclicks).await,
                 _ => break,
             };
             

@@ -34,7 +34,7 @@ pub async fn run(
 
     let mut show_cheats = false;
 
-    let sloth = StillImage::new(
+    let mut sloth = StillImage::new(
         "assets/sloth.png",
         1080.0, // width
         1080.0, // height
@@ -44,14 +44,14 @@ pub async fn run(
         1.0,    // Normal zoom (100%)
     )
     .await;
-
+sloth.set_preload(tm.get_preload("assets/sloth.png").unwrap());
     let mut lbl_slothtalk = Label::new("", 500.0, 800.0, 30);
     lbl_slothtalk.with_alignment(TextAlign::Center);
 
-    let btn_play = TextButton::new(500.0, 450.0, 200.0, 100.0, "play", PINK, WHITE, 60);
+    let btn_play = TextButton::new(800.0, 500.0, 200.0, 100.0, "play?", PINK, WHITE, 60);
 
     let mut img_bg = StillImage::new(
-        "assets/parkday.png",
+        "",
         1920.0, // width
         1080.0, // height
         0.0,    // x position
@@ -60,7 +60,7 @@ pub async fn run(
         1.0,    // Normal zoom (100%)
     )
     .await;
-
+img_bg.set_preload(tm.get_preload("assets/parkday.png").unwrap());
     let mut cheats = TextInput::new(450.0, 650.0, 500.0, 40.0, 25.0);
     cheats.set_prompt("set clicks,game1,game2,game3,name");
 
@@ -221,9 +221,43 @@ pub async fn run(
         if btnclicks == 17 {
             btn_back.enabled = true;
             btn_next.enabled = false;
+            lbl_slothtalk.set_text(format!(""));
+       
+       if btn_play.click() {
+                return (
+                    "slothg2".to_string(),
+                    tm,
+                    _elapsed,
+                    game1,
+                    game2,
+                    game3,
+                    playername.to_string(),
+                    btnclicks,
+                );
+            }
         }
 
-        if is_key_pressed(KeyCode::F1) {
+       
+       if btnclicks == 18 && game2 == 1 && game1 == 1 {
+            btn_back.enabled = true;
+            btn_next.enabled = true;
+            lbl_slothtalk.set_text(format!("zzz"));
+        }
+       
+          if btnclicks == 19 {
+            btn_back.enabled = true;
+            btn_next.enabled = true;
+            lbl_slothtalk.set_text(format!("woah you're really fast..."));
+        }
+       
+       
+       
+       
+       
+       
+       
+       
+       if is_key_pressed(KeyCode::F1) {
             show_cheats = !show_cheats;
         }
         if show_cheats {

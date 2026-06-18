@@ -5,20 +5,9 @@ use crate::modules::still_image::StillImage;
  use crate::modules::preload_image::TextureManager;
  use crate::modules::preload_image::LoadingScreenOptions;
 
-    fn window_conf() -> Conf {
-    Conf {
-        window_title: "vn".to_string(),
-        window_width: 1920,
-        window_height: 1080,
-        fullscreen: false,
-        high_dpi: true,
-        window_resizable: true,
-        sample_count: 4, // MSAA: makes shapes look smoother
-        ..Default::default()
-    }
-}
 
-pub async fn run(tm: TextureManager, elapsed: f64, game1: i32, game2: i32, game3: i32) -> (String, TextureManager, f64, i32, i32, i32) {
+pub async fn run(tm: TextureManager,_elapsed: f64, game1: i32, game2: i32, game3: i32, playername: String, btnclicks: i32) -> 
+(String, TextureManager, f64, i32, i32, i32, String, i32) {
   let btn_exit = TextButton::new(
     1870.0,
     0.0,
@@ -79,7 +68,7 @@ pub async fn run(tm: TextureManager, elapsed: f64, game1: i32, game2: i32, game3
       
 
        if btn_play.click() {
-            return ("slothtalk".to_string(),tm, elapsed, game1, game2, game3);
+            return ("slothtalk".to_string(),tm, _elapsed, game1, game2, game3, playername, btnclicks);
         }
        
 img_mrplaceholder.draw();
@@ -87,7 +76,7 @@ img_mrsloth.draw();
 img_mrgreed.draw();
 
 if btn_exit.click() {
-    return ("main".to_string(),tm, elapsed, game1, game2, game3);
+    return ("main".to_string(),tm, _elapsed, game1, game2, game3, playername, btnclicks);
 }
         draw_text("Menu", 20.0, 40.0, 30.0, BLACK);
     

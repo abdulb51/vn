@@ -13,21 +13,28 @@ use macroquad::prelude::KeyCode::Right;
 use macroquad::prelude::*;
 
 
-/// Time limit in seconds - player must catch target 5 times before this
+
+
+/// Time limit player must catch target 5 times before this ends
 const TIME_LIMIT: f64 = 30.0;
 
 /// Player movement speed
-const MOVE_SPEED: f32 = 500.0;
+const MOVE_SPEED: f32 = 550.0;
 
 
-pub async fn run(tm: TextureManager, elapsed: f64, game1: i32, game2: i32, game3: i32) -> (String, TextureManager, f64, i32, i32, i32) {
+pub async fn run(tm: TextureManager,_elapsed: f64, game1: i32, game2: i32, game3: i32, playername: String, btnclicks: i32) -> 
+(String, TextureManager, f64, i32, i32, i32, String, i32) {
+
+
+request_new_screen_size(1080.0, 1080.0);
+
+
     let mut tags = 0;
-
     // The target bot
     let mut img_target = StillImage::new("assets/sloth.png", 130.0, 130.0, 900.0, 70.0, true, 1.0).await;
 
     // The player
-    let mut img_player = StillImage::new("assets/.png", 150.0, 150.0, 10.0, 40.0, true, 1.0).await;
+    let mut img_player = StillImage::new("assets/placeholder.png", 150.0, 150.0, 10.0, 40.0, true, 1.0).await;
 
     // Background maze
     let img_bg = StillImage::new("assets/maze.png", 1080.0, 1080.0, 0.0, 0.0, true, 1.0).await;
@@ -42,13 +49,11 @@ pub async fn run(tm: TextureManager, elapsed: f64, game1: i32, game2: i32, game3
     let mut lbl_timer = Label::new("Time: 30.0s", 800.0, 40.0, 32);
     lbl_timer.with_colors(WHITE, Some(Color::new(0.0, 0.0, 0.0, 0.6)));
 
-    let mut lbl_speed = Label::new("Speed: 1.0x", 400.0, 40.0, 28);
-    lbl_speed.with_colors(YELLOW, Some(Color::new(0.0, 0.0, 0.0, 0.6)));
 
     let start_time = get_time();
 
     loop {
-        clear_background(WHITE);
+        clear_background(GRAY);
         img_bg.draw();
    
 
@@ -57,12 +62,12 @@ pub async fn run(tm: TextureManager, elapsed: f64, game1: i32, game2: i32, game3
 
         // Timer check
         if remaining <= 0.0 {
-            return ("deathscreen".to_string(), tm, elapsed, game1, game2, game3);
+            return ("g1lose".to_string(), tm, elapsed, game1, game2, game3, playername.to_string(), btnclicks);
         }
 
         // Win check
         if tags >= 10 {
-            return ("win".to_string(), tm, elapsed, game1, game2, game3);
+            return ("wing1".to_string(), tm, elapsed, game1, game2, game3, playername.to_string(), btnclicks);
         }
 
         // Update UI labels
@@ -86,16 +91,12 @@ pub async fn run(tm: TextureManager, elapsed: f64, game1: i32, game2: i32, game3
         if is_key_down(KeyCode::Right) || is_key_down(KeyCode::D) {
             move_dir.x += 2.0;
         }
-        if is_key_pressed(Right) || is_key_pressed(KeyCode::D) {
-            img_player.set_image("assets/subaru.png").await; // Change to right looking image
-        }
+       
 
         if is_key_down(KeyCode::Left) || is_key_down(KeyCode::A) {
             move_dir.x -= 2.0;
 
-            if is_key_pressed(KeyCode::Left) || is_key_pressed(KeyCode::A) {
-                img_player.set_image("assets/subaruflip.png").await; // Change to left looking image
-            }
+         
         }
         if is_key_down(KeyCode::Down) || is_key_down(KeyCode::S) {
             move_dir.y += 2.0;
@@ -149,7 +150,7 @@ pub async fn run(tm: TextureManager, elapsed: f64, game1: i32, game2: i32, game3
 
         lbl_tags.draw();
         lbl_timer.draw();
-        lbl_speed.draw();
+  
 
         next_frame().await;
     }
